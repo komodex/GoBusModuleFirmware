@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>Seven Segment Display Module/Debug</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>160</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        
+        
+        
+        
+      <ColumnWidth0>16</ColumnWidth0><ColumnWidth1>1218</ColumnWidth1><ColumnWidth2>325</ColumnWidth2><ColumnWidth3>81</ColumnWidth3></Build>
+      <TerminalIO/>
+    <Find-in-Files><ColumnWidth0>580</ColumnWidth0><ColumnWidth1>82</ColumnWidth1><ColumnWidth2>994</ColumnWidth2></Find-in-Files><Debug-Log><ColumnWidth0>19</ColumnWidth0><ColumnWidth1>1622</ColumnWidth1></Debug-Log><SourceBrowser/></Static>
+    <Windows>
+      
+      
+    <Wnd2>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-4991-9085</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>Seven Segment Display Module</ExpandedNode><ExpandedNode>Seven Segment Display Module/Libraries</ExpandedNode><ExpandedNode>Seven Segment Display Module/main.c</ExpandedNode></NodeDict></Session>
+          </Tab>
+        <Tab><Identity>TabID-28203-32345</Identity><TabName>Source Browser</TabName><Factory>SourceBrowser</Factory><Session><TypeFilter>2147483647</TypeFilter><FileFilter>1</FileFilter></Session></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-27073-9490</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-23735-3147</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab><Tab><Identity>TabID-17623-11286</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd3></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>28</YPos><SelStart>848</SelStart><SelEnd>848</SelEnd></Tab><ActiveTab>0</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\spi.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>1284</SelStart><SelEnd>1284</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\..\..\Program Files (x86)\IAR Systems\Embedded Workbench 6.0 Kickstart\stm8\inc\iostm8s003f3.h</Filename><XPos>0</XPos><YPos>2336</YPos><SelStart>76429</SelStart><SelEnd>76429</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\sevensegment.c</Filename><XPos>0</XPos><YPos>54</YPos><SelStart>1488</SelStart><SelEnd>1488</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\config.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>480</SelStart><SelEnd>480</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\spi.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>146</SelStart><SelEnd>146</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\config.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>211</SelStart><SelEnd>211</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\sevensegment.h</Filename><XPos>0</XPos><YPos>3</YPos><SelStart>279</SelStart><SelEnd>279</SelEnd></Tab><ActiveTab>0</ActiveTab></Pane><Sizes><Pane><X>500000</X><Y>500000</Y></Pane><Pane><X>500000</X><Y>500000</Y></Pane></Sizes><SplitMode>4</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-00766df0><key>iaridepm.enu1</key></Toolbar-00766df0></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>692</Bottom><Right>234</Right><x>-2</x><y>-2</y><xscreen>236</xscreen><yscreen>243</yscreen><sizeHorzCX>140476</sizeHorzCX><sizeHorzCY>248466</sizeHorzCY><sizeVertCX>140476</sizeVertCX><sizeVertCY>709611</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>241</Bottom><Right>1682</Right><x>-2</x><y>-2</y><xscreen>1684</xscreen><yscreen>243</yscreen><sizeHorzCX>1002381</sizeHorzCX><sizeHorzCY>248466</sizeHorzCY><sizeVertCX>140476</sizeVertCX><sizeVertCY>248466</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+
