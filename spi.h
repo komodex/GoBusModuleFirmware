@@ -14,6 +14,4 @@
 void SPI_Init();
 void SPI_Reset();
 
-
-
 #endif

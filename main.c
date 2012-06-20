@@ -6,30 +6,12 @@ int main( void )
   CLK_CKDIVR_CPUDIV = 0;
   CLK_CKDIVR_HSIDIV = 0;
 
-  // Temp stuff
-  PB_DDR_DDR5 = 1;
-  PB_CR1_C15 = 1;
-  PB_CR2_C25 = 1;
-  PB_DDR_DDR4 = 1;
-  PB_CR1_C14 = 1;
-  PB_CR2_C24 = 1;
-  // End temp stuff
-
   SPI_Init();
   SPI_Reset();
 
   __enable_interrupt();
 
   SevenSegment_Init();
-
-  // TEMP TEMP TEMP
-  // Setting up the uart
-  /*
-  UART1_CR2_TEN = 1;
-  UART1_BRR2 = 0x01;
-  UART1_BRR1 = 0x01;
-*/
-  // TEMP TEMP TEMP
 
   while(1)
   {

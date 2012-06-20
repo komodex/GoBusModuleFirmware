@@ -52,8 +52,6 @@ void SPI_Reset()
 
 INTERRUPT_HANDLER(SPI_IRQ)
 {
-  //PB_ODR_ODR5 = 1;
-
   // SPI Overflow
   if (SPI_SR_OVR)
   {
@@ -85,7 +83,7 @@ INTERRUPT_HANDLER(SPI_IRQ)
   if (SPI_SR_RXNE)
   {
     // Is this an enumeration request?
-    if (_rxBufferPos == 0 && SPI_DR == 0xFE) // todo: define something for htis
+    if (_rxBufferPos == 0 && SPI_DR == 0xFE) // todo: define something for this
     {
       // Copy the Module ID to the transmit buffer
       for (int i = 0; i <= 16; i++)
@@ -108,7 +106,4 @@ INTERRUPT_HANDLER(SPI_IRQ)
       }
     }
   }
-
-
-  PB_ODR_ODR5 = 0;
 }

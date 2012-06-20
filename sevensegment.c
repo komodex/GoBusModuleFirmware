@@ -65,7 +65,6 @@ void SevenSegment_Init()
 
   // Set up Timer 2 for PWM
   // Prescaler
-//  PD_DDR_DDR4 = 1;
   TIM2_PSCR_PSC = 0x00;
   // Auto-reload register
   TIM2_ARRH = 0x03;
@@ -78,13 +77,6 @@ void SevenSegment_Init()
   TIM2_CCER1_CC2E = 1;
   // Enable
   TIM2_CR1_CEN = 1;
-
-
-  //SevenSegment_SetDisplayValues(0xff,0xFF,0xff,0xff);
-
-  //SetDigit(2);
-  //PD_DDR_DDR4 = 1;
-  //PD_CR1_C14 = 1;
 }
 
 // Display values

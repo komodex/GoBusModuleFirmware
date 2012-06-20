@@ -3,7 +3,6 @@
 #define _SEVENSEGMENT_H_
 
 #include "config.h"
-//#include "iostm8s003f3.h"
 
 
 // SDO
@@ -35,8 +34,6 @@
 #define SSEG_D4_ODR PA_ODR_ODR1
 #define SSEG_D4_DDR PA_DDR_DDR1
 #define SSEG_D4_CR1 PA_CR1_C11
-
-
 
 void SevenSegment_Init();
 
