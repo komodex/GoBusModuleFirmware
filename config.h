@@ -19,7 +19,7 @@ typedef unsigned short u16;
 #include "spi.h"
 #include "sevensegment.h"
 
-extern const u8 ModuleID[];
+extern u8 ModuleID[];
 
 // IRQ
 #define IRQ_ODR PD_ODR_ODR2

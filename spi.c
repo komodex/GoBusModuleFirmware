@@ -4,8 +4,9 @@ extern void HandleMessage(u8* rxBuffer, u8* txBuffer);
 u8 _txBuffer[17];
 u8 _rxBuffer[18];
 
-u8 _txBufferPos;
-u8 _rxBufferPos;
+u8* _txBufferPtr;
+u8  _txBufferPos;
+u8  _rxBufferPos;
 
 void SPI_Init()
 {
@@ -38,6 +39,7 @@ void SPI_Reset()
   SPI_ICR_RXIE = 1;
 
   // Reset the buffer positions
+  _txBufferPtr = _txBuffer;
   _txBufferPos = 0;
   _rxBufferPos = 0;
 
@@ -52,6 +54,8 @@ void SPI_Reset()
 
 INTERRUPT_HANDLER(SPI_IRQ)
 {
+  u8 receivedByte = 0;
+
   // SPI Overflow
   if (SPI_SR_OVR)
   {
@@ -60,13 +64,26 @@ INTERRUPT_HANDLER(SPI_IRQ)
     return;
   }
 
+  // Receive buffer not empty
+  if (SPI_SR_RXNE)
+  {
+    receivedByte = 1;
+    // Is this an enumeration request?
+    if (_rxBufferPos == 0 && SPI_DR == 0xFE) // todo: define something for this
+    {
+      _txBufferPtr = ModuleID;
+    }
+    // Read the incoming byte
+    _rxBuffer[_rxBufferPos++] = SPI_DR;
+  }
+
   // Transmit buffer empty
   if (SPI_SR_TXE)
   {
     if (_txBufferPos < 16)
     {
       // Put the next byte in the SPI data register
-      SPI_DR = _txBuffer[_txBufferPos++];
+      SPI_DR = _txBufferPtr[_txBufferPos++];
 
       // If we're at the end of the message, transmit the CRC value next
       if (_txBufferPos == 16)
@@ -79,20 +96,9 @@ INTERRUPT_HANDLER(SPI_IRQ)
     }
   }
 
-  // Receive buffer not empty
-  if (SPI_SR_RXNE)
+  // Process incoming byte
+  if (receivedByte)
   {
-    // Is this an enumeration request?
-    if (_rxBufferPos == 0 && SPI_DR == 0xFE) // todo: define something for this
-    {
-      // Copy the Module ID to the transmit buffer
-      for (int i = 0; i <= 16; i++)
-        _txBuffer[i] = ModuleID[i];
-    }
-
-    // Read the incoming byte
-    _rxBuffer[_rxBufferPos++] = SPI_DR;
-
     if (_rxBufferPos == 18)
     {
       if (SPI_SR_CRCERR == 0)
@@ -106,4 +112,5 @@ INTERRUPT_HANDLER(SPI_IRQ)
       }
     }
   }
+
 }
