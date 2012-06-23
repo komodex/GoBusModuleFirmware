@@ -2,7 +2,7 @@
 
 <workspace>
   <project>
-    <path>$WS_DIR$\Seven Segment Display Module.ewp</path>
+    <path>$WS_DIR$\Seven Segment Display Module\Seven Segment Display Module.ewp</path>
   </project>
   <batchBuild/>
 </workspace>

@@ -1,4 +1,5 @@
 #include "config.h"
+
 extern void HandleMessage(u8* rxBuffer, u8* txBuffer);
 
 u8 _txBuffer[17];

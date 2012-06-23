@@ -248,7 +248,8 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state></state>
+          <state>$PROJ_DIR$</state>
+          <state>$PROJ_DIR$\..\Libraries</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1529,7 +1530,7 @@
     <name>$PROJ_DIR$\sevensegment.c</name>
   </file>
   <file>
-    <name>$PROJ_DIR$\spi.c</name>
+    <name>$PROJ_DIR$\..\Libraries\spi.c</name>
   </file>
 </project>
 
