@@ -2,6 +2,9 @@
 
 <workspace>
   <project>
+    <path>$WS_DIR$\Character LCD Module\Character LCD Module.ewp</path>
+  </project>
+  <project>
     <path>$WS_DIR$\Seven Segment Display Module\Seven Segment Display Module.ewp</path>
   </project>
   <batchBuild/>
