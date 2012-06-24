@@ -16,7 +16,7 @@
 #include "intrinsics.h"
 #include "iostm8s003f3.h"
 #include "spi.h"
-//#include "sevensegment.h"
+#include "characterlcd.h"
 
 extern u8 ModuleID[];
 
