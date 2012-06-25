@@ -13,21 +13,9 @@ int main( void )
 
   CharacterLCD_Init();
 
-  CharacterLCD_SendData('H');
-  CharacterLCD_SendData('e');
-  CharacterLCD_SendData('l');
-  CharacterLCD_SendData('l');
-  CharacterLCD_SendData('o');
-  CharacterLCD_SendData(' ');
-  CharacterLCD_SendData('w');
-  CharacterLCD_SendData('o');
-  CharacterLCD_SendData('r');
-  CharacterLCD_SendData('l');
-  CharacterLCD_SendData('d');
-  CharacterLCD_SendData('!');
-
   while(1)
   {
+    CharacterLCD_ProcessLoop();
   }
 }
 

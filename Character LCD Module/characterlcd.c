@@ -1,5 +1,11 @@
 #include "characterlcd.h"
 
+u8 _line1[16];
+u8 _line2[16];
+
+u8 _line1Update = 0;
+u8 _line2Update = 0;
+
 void Delay(u16 delay)
 {
   while (delay--);
@@ -82,4 +88,40 @@ void CharacterLCD_Enable()
   Delay(1000);
   CLCD_LCDE_ODR = 0;
   Delay(1000);
+}
+
+void CharacterLCD_SetLine(u8* destination, u8* data, u8 start, u8 length)
+{
+  for (u8 i = 0; (start + i) < (start + length); i++)
+    destination[i] = data[start + i];
+}
+
+void CharacterLCD_SetLine1(u8* data, u8 start, u8 length)
+{
+  CharacterLCD_SetLine(_line1, data, start, length);
+  _line1Update = 1;
+}
+
+void CharacterLCD_SetLine2(u8* data, u8 start, u8 length)
+{
+  CharacterLCD_SetLine(_line2, data, start, length);
+  _line2Update = 1;
+}
+
+void CharacterLCD_ProcessLoop()
+{
+  if (_line1Update)
+  {
+    _line1Update = 0;
+    CharacterLCD_SendCommand(LCD_CURSOR_ROW1);
+    for (int i = 0; i < 16; i++)
+      CharacterLCD_SendData(_line1[i]);
+  }
+  if (_line2Update)
+  {
+    _line2Update = 0;
+    CharacterLCD_SendCommand(LCD_CURSOR_ROW2);
+    for (int i = 0; i < 16; i++)
+      CharacterLCD_SendData(_line2[i]);
+  }
 }

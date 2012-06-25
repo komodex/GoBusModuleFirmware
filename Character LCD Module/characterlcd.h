@@ -33,6 +33,11 @@ void CharacterLCD_SendCommand(u8 data);
 void CharacterLCD_SendData(u8 data);
 void CharacterLCD_Enable();
 
+void CharacterLCD_SetLine1(u8* data, u8 start, u8 length);
+void CharacterLCD_SetLine2(u8* data, u8 start, u8 length);
+
+void CharacterLCD_ProcessLoop();
+
 //////
 // Commands
 
@@ -48,5 +53,9 @@ void CharacterLCD_Enable();
 
 // LCD Entry Mode
 #define LCD_ENTRY_INC 0x06
+
+// Move cursor commands
+#define LCD_CURSOR_ROW1 0x80
+#define LCD_CURSOR_ROW2 0xC0
 
 #endif
