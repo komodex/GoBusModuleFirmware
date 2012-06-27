@@ -2,8 +2,10 @@
 
 extern void HandleMessage(u8* rxBuffer, u8* txBuffer);
 
-u8 _txBuffer[17];
-u8 _rxBuffer[18];
+u8 _currentMessageLength;
+
+u8 _txBuffer[SPI_MESSAGE_LENGTH];
+u8 _rxBuffer[SPI_MESSAGE_LENGTH];
 
 u8* _txBufferPtr;
 u8  _txBufferPos;
@@ -31,6 +33,9 @@ void SPI_Reset()
   SPI_CR2_CRCEN = 1;
   SPI_SR_CRCERR = 0;
   SPI_Enable();
+
+  // Reset the message length
+  _currentMessageLength = SPI_MESSAGE_LENGTH;
 
   // Set the first byte
   SPI_DR = GO_FRAME_PREFIX;
@@ -72,6 +77,7 @@ INTERRUPT_HANDLER(SPI_IRQ)
     // Is this an enumeration request?
     if (_rxBufferPos == 0 && SPI_DR == 0xFE) // todo: define something for this
     {
+      _currentMessageLength = 18; // Enumeration request
       _txBufferPtr = ModuleID;
     }
     // Read the incoming byte
@@ -81,7 +87,7 @@ INTERRUPT_HANDLER(SPI_IRQ)
   // Transmit buffer empty
   if (SPI_SR_TXE)
   {
-    if (_txBufferPos < 16)
+    if (_txBufferPos < (_currentMessageLength - 2))
     {
       // Put the next byte in the SPI data register
       SPI_DR = _txBufferPtr[_txBufferPos++];
@@ -100,7 +106,7 @@ INTERRUPT_HANDLER(SPI_IRQ)
   // Process incoming byte
   if (receivedByte)
   {
-    if (_rxBufferPos == 18)
+    if (_rxBufferPos == _currentMessageLength)
     {
       if (SPI_SR_CRCERR == 0)
       {
