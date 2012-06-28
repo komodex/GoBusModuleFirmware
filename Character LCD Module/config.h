@@ -5,10 +5,8 @@
 #define CMD_READ  (0<<7)
 #define CMD_WRITE (1<<7)
 
-//#define CMD_DISPLAYVALUE 0x01
-//#define CMD_BRIGHTNESS   0x02
-//#define CMD_COLON        0x03
-//#define CMD_APOSTROPHE   0x04
+#define CMD_LINE1        0x01
+#define CMD_LINE2        0x02
 
 
 
@@ -20,7 +18,7 @@
 
 extern u8 ModuleID[];
 
-#define SPI_MESSAGE_LENGTH 18
+#define SPI_MESSAGE_LENGTH 20
 
 // IRQ
 #define IRQ_ODR PD_ODR_ODR2

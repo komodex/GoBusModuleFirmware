@@ -19,8 +19,6 @@ void CharacterLCD_Init()
   // Shift register pins
   CLCD_SD_DDR = 1;
   CLCD_SD_CR1 = 1;
-  CLCD_STCP_DDR = 1;
-  CLCD_STCP_CR1 = 1;
   CLCD_SHCP_DDR = 1;
   CLCD_SHCP_CR1 = 1;
 
@@ -63,10 +61,6 @@ void CharacterLCD_Send(u8 data)
     data = (data << 1);
   }
 
-  // Latch the output
-  CLCD_STCP_ODR = 1;
-  CLCD_STCP_ODR = 0;
-
   CharacterLCD_Enable();
 }
 
@@ -106,6 +100,18 @@ void CharacterLCD_SetLine2(u8* data, u8 start, u8 length)
 {
   CharacterLCD_SetLine(_line2, data, start, length);
   _line2Update = 1;
+}
+
+void CharacterLCD_GetLine1(u8 result[], u8 offset)
+{
+  for (u8 i = 0; i < 16; i++)
+    result[offset + i] = _line1[i];
+}
+
+void CharacterLCD_GetLine2(u8 result[], u8 offset)
+{
+  for (u8 i = 0; i < 16; i++)
+    result[offset + i] = _line2[i];
 }
 
 void CharacterLCD_ProcessLoop()
