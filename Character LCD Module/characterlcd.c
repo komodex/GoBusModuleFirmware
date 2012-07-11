@@ -43,6 +43,29 @@ void CharacterLCD_Init()
   CharacterLCD_SendCommand(LCD_ENTRY_INC);
   // Display on
   CharacterLCD_SendCommand(LCD_DISP_ON);
+
+  // Set up Timer 2 for PWM
+  // Prescaler
+  TIM2_PSCR_PSC = 0x04;
+  // Auto-reload register
+  TIM2_ARRH = 0x00;
+  TIM2_ARRL = 0xFE; // TODO: FE and not FF?
+  // Set default brightness
+  CharacterLCD_SetColor(0xFF, 0xFF, 0xFF);
+  // Output compare mode
+  TIM2_CCMR1_OC1M = 7;
+  TIM2_CCMR2_OC2M = 7;
+  TIM2_CCMR3_OC3M = 7;
+  // Output polarity
+  TIM2_CCER1_CC1P = 1;
+  TIM2_CCER1_CC2P = 1;
+  TIM2_CCER2_CC3P = 1;
+  // Output enable
+  TIM2_CCER1_CC1E = 1;
+  TIM2_CCER1_CC2E = 1;
+  TIM2_CCER2_CC3E = 1;
+  // Enable
+  TIM2_CR1_CEN = 1;
 }
 
 void CharacterLCD_Send(u8 data)
@@ -112,6 +135,20 @@ void CharacterLCD_GetLine2(u8 result[], u8 offset)
 {
   for (u8 i = 0; i < 16; i++)
     result[offset + i] = _line2[i];
+}
+
+void CharacterLCD_SetColor(u8 red, u8 green, u8 blue)
+{
+  TIM2_CCR1L = red;
+  TIM2_CCR2L = green;
+  TIM2_CCR3L = blue;
+}
+
+void CharacterLCD_GetColor(u8 result[], u8 offset)
+{
+  result[offset + 0] = TIM2_CCR1L;
+  result[offset + 1] = TIM2_CCR2L;
+  result[offset + 2] = TIM2_CCR3L;
 }
 
 void CharacterLCD_ProcessLoop()

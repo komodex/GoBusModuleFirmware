@@ -35,6 +35,9 @@ void CharacterLCD_SetLine2(u8* data, u8 start, u8 length);
 void CharacterLCD_GetLine1(u8 result[], u8 offset);
 void CharacterLCD_GetLine2(u8 result[], u8 offset);
 
+void CharacterLCD_SetColor(u8 red, u8 green, u8 blue);
+void CharacterLCD_GetColor(u8 result[], u8 offset);
+
 void CharacterLCD_ProcessLoop();
 
 //////

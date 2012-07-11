@@ -30,6 +30,17 @@ void HandleMessage(u8* rxBuffer, u8* txBuffer)
 {
   switch (rxBuffer[1])
   {
+    // Backlight color
+    case CMD_READ | CMD_COLOR:
+      txBuffer[1] = CMD_READ | CMD_COLOR;
+      CharacterLCD_GetColor(txBuffer, 2);
+      SendIRQ();
+      break;
+
+    case CMD_WRITE | CMD_COLOR:
+      CharacterLCD_SetColor(rxBuffer[2], rxBuffer[3], rxBuffer[4]);
+      break;
+
     // Line 1
     case CMD_READ | CMD_LINE1:
       txBuffer[1] = CMD_READ | CMD_LINE1;
