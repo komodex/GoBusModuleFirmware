@@ -14,13 +14,13 @@
 #define CLCD_LCDE_ODR PB_ODR_ODR5
 
 // Serial data
-#define CLCD_SD_DDR PC_DDR_DDR3
-#define CLCD_SD_CR1 PC_CR1_C13
-#define CLCD_SD_ODR PC_ODR_ODR3
+#define CLCD_SD_DDR PA_DDR_DDR2
+#define CLCD_SD_CR1 PA_CR1_C12
+#define CLCD_SD_ODR PA_ODR_ODR2
 // SHCP - Shift register clock
-#define CLCD_SHCP_DDR PC_DDR_DDR4
-#define CLCD_SHCP_CR1 PC_CR1_C14
-#define CLCD_SHCP_ODR PC_ODR_ODR4
+#define CLCD_SHCP_DDR PA_DDR_DDR1
+#define CLCD_SHCP_CR1 PA_CR1_C11
+#define CLCD_SHCP_ODR PA_ODR_ODR1
 
 ///////
 

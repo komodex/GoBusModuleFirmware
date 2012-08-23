@@ -22,9 +22,9 @@ extern u8 ModuleID[];
 #define SPI_MESSAGE_LENGTH 20
 
 // IRQ
-#define IRQ_ODR PD_ODR_ODR5
-#define IRQ_DDR PD_DDR_DDR5
-#define IRQ_CR1 PD_CR1_C15
+#define IRQ_ODR PC_ODR_ODR4
+#define IRQ_DDR PC_DDR_DDR4
+#define IRQ_CR1 PC_CR1_C14
 
 
 
