@@ -93,7 +93,7 @@ INTERRUPT_HANDLER(SPI_IRQ)
       SPI_DR = _txBufferPtr[_txBufferPos++];
 
       // If we're at the end of the message, transmit the CRC value next
-      if (_txBufferPos == 16)
+      if (_txBufferPos == (_currentMessageLength - 2))
       {
         // Transmit CRC byte after this byte
         SPI_CR2_CRCNEXT = 1;
