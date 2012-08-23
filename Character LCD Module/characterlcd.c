@@ -1,5 +1,7 @@
 #include "characterlcd.h"
 
+u8 _initialized = 0;
+
 u8 _line1[16];
 u8 _line2[16];
 
@@ -43,6 +45,8 @@ void CharacterLCD_Init()
   CharacterLCD_SendCommand(LCD_ENTRY_INC);
   // Display on
   CharacterLCD_SendCommand(LCD_DISP_ON);
+
+  _initialized = 1;
 
   // Set up Timer 2 for PWM
   // Prescaler
@@ -101,10 +105,14 @@ void CharacterLCD_SendData(u8 data)
 
 void CharacterLCD_Enable()
 {
+  u16 delay = 25;
+  if (!_initialized)
+    delay = 1000;
+
   CLCD_LCDE_ODR = 1;
-  Delay(1000);
+  Delay(delay);
   CLCD_LCDE_ODR = 0;
-  Delay(1000);
+  Delay(delay);
 }
 
 void CharacterLCD_SetLine(u8* destination, u8* data, u8 start, u8 length)
