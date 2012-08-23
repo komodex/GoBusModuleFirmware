@@ -55,7 +55,7 @@ void CharacterLCD_Init()
   TIM2_ARRH = 0x00;
   TIM2_ARRL = 0xFE; // TODO: FE and not FF?
   // Set default brightness
-  CharacterLCD_SetColor(0xFF, 0xFF, 0xFF);
+  CharacterLCD_SetColor(0x00, 0x00, 0x00);
   // Output compare mode
   TIM2_CCMR1_OC1M = 7;
   TIM2_CCMR2_OC2M = 7;
@@ -105,7 +105,7 @@ void CharacterLCD_SendData(u8 data)
 
 void CharacterLCD_Enable()
 {
-  u16 delay = 25;
+  u16 delay = 50;
   if (!_initialized)
     delay = 1000;
 
