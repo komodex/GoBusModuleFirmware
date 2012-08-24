@@ -35,6 +35,9 @@ void CharacterLCD_GetRaw(u8 result[], u8 offset);
 void CharacterLCD_SetLine(u8 line, u8* data, u8 start, u8 length);
 void CharacterLCD_GetLine(u8 line, u8 result[], u8 offset);
 
+void CharacterLCD_SetCustomChar(u8 index, u8* data, u8 start);
+void CharacterLCD_GetCustomChar(u8 index, u8 result[], u8 offset);
+
 void CharacterLCD_SetColor(u8 red, u8 green, u8 blue);
 void CharacterLCD_GetColor(u8 result[], u8 offset);
 
@@ -59,5 +62,8 @@ void CharacterLCD_ProcessLoop();
 // Move cursor commands
 #define LCD_CURSOR_ROW1 0x80
 #define LCD_CURSOR_ROW2 0xC0
+
+// Custom character addresses
+#define LCD_CUSTOM_CHAR 0x40
 
 #endif

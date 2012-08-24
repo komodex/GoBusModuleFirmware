@@ -64,5 +64,17 @@ void HandleMessage(u8* rxBuffer, u8* txBuffer)
       CharacterLCD_SetLine(rxBuffer[2], rxBuffer, 3, 16);
       break;
 
+    // Custom characters
+    case CMD_READ | CMD_CUSTOMCHAR:
+      txBuffer[0] = CMD_READ | CMD_CUSTOMCHAR;
+      txBuffer[1] = rxBuffer[2];
+      CharacterLCD_GetCustomChar(rxBuffer[2], txBuffer, 2);
+      SendIRQ();
+      break;
+
+    case CMD_WRITE | CMD_CUSTOMCHAR:
+      CharacterLCD_SetCustomChar(rxBuffer[2], rxBuffer, 3);
+      break;
+
   }
 }

@@ -8,7 +8,7 @@
 #define CMD_COLOR        0x01
 #define CMD_RAW          0x02
 #define CMD_LINE         0x03
-
+#define CMD_CUSTOMCHAR   0x04
 
 
 #include "main.h"

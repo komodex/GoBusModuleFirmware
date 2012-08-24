@@ -9,6 +9,9 @@ u8 _rawData = 0;
 u8 _lineData[4][16];
 u8 _lineUpdate[4];
 
+u8 _customCharData[8][8];
+u8 _customCharUpdate[8];
+
 void Delay(u16 delay)
 {
   while (delay--);
@@ -157,6 +160,25 @@ void CharacterLCD_GetLine(u8 line, u8 result[], u8 offset)
     result[offset + i] = _lineData[line][i];
 }
 
+void CharacterLCD_SetCustomChar(u8 index, u8* data, u8 start)
+{
+  if (index > 7)
+    return;
+
+  for (u8 i = 0; i < 8; i++)
+    _customCharData[index][i] = data[start + i];
+  _customCharUpdate[index] = 1;
+}
+
+void CharacterLCD_GetCustomChar(u8 index, u8 result[], u8 offset)
+{
+  if (index > 7)
+    return;
+
+  for (u8 i = 0; i < 16; i++)
+    result[offset + i] = _customCharData[index][i];
+}
+
 void CharacterLCD_SetColor(u8 red, u8 green, u8 blue)
 {
   TIM2_CCR1L = red;
@@ -186,5 +208,16 @@ void CharacterLCD_ProcessLoop()
     CharacterLCD_SendCommand(LCD_CURSOR_ROW2);
     for (int i = 0; i < 16; i++)
       CharacterLCD_SendData(_lineData[1][i]);
+  }
+
+  for (int i = 0; i < 8; i++)
+  {
+    if (_customCharUpdate[i])
+    {
+      CharacterLCD_SendCommand(LCD_CUSTOM_CHAR + (8 * i));
+      for (int j = 0; j < 8; j++)
+        CharacterLCD_SendData(_customCharData[i][j]);
+      _customCharUpdate[i] = 0;
+    }
   }
 }
