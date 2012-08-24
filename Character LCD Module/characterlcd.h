@@ -32,11 +32,8 @@ void CharacterLCD_Enable();
 void CharacterLCD_SendRaw(u8 id, u8 isData, u8 value);
 void CharacterLCD_GetRaw(u8 result[], u8 offset);
 
-void CharacterLCD_SetLine1(u8* data, u8 start, u8 length);
-void CharacterLCD_SetLine2(u8* data, u8 start, u8 length);
-
-void CharacterLCD_GetLine1(u8 result[], u8 offset);
-void CharacterLCD_GetLine2(u8 result[], u8 offset);
+void CharacterLCD_SetLine(u8 line, u8* data, u8 start, u8 length);
+void CharacterLCD_GetLine(u8 line, u8 result[], u8 offset);
 
 void CharacterLCD_SetColor(u8 red, u8 green, u8 blue);
 void CharacterLCD_GetColor(u8 result[], u8 offset);

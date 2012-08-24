@@ -6,11 +6,8 @@ u8 _rawID = 0;
 u8 _rawType = 0;
 u8 _rawData = 0;
 
-u8 _line1[16];
-u8 _line2[16];
-
-u8 _line1Update = 0;
-u8 _line2Update = 0;
+u8 _lineData[4][16];
+u8 _lineUpdate[4];
 
 void Delay(u16 delay)
 {
@@ -138,34 +135,26 @@ void CharacterLCD_GetRaw(u8 result[], u8 offset)
   result[offset + 2] = _rawData;
 }
 
-void CharacterLCD_SetLine(u8* destination, u8* data, u8 start, u8 length)
+void CharacterLCD_SetLine(u8 line, u8* data, u8 start, u8 length)
 {
+  if (line > 4)
+    return;
+  line--;
+
   for (u8 i = 0; (start + i) < (start + length); i++)
-    destination[i] = data[start + i];
+    _lineData[line][i] = data[start + i];
+
+  _lineUpdate[line] = 1;
 }
 
-void CharacterLCD_SetLine1(u8* data, u8 start, u8 length)
+void CharacterLCD_GetLine(u8 line, u8 result[], u8 offset)
 {
-  CharacterLCD_SetLine(_line1, data, start, length);
-  _line1Update = 1;
-}
+  if (line > 4)
+    return;
+  line--;
 
-void CharacterLCD_SetLine2(u8* data, u8 start, u8 length)
-{
-  CharacterLCD_SetLine(_line2, data, start, length);
-  _line2Update = 1;
-}
-
-void CharacterLCD_GetLine1(u8 result[], u8 offset)
-{
   for (u8 i = 0; i < 16; i++)
-    result[offset + i] = _line1[i];
-}
-
-void CharacterLCD_GetLine2(u8 result[], u8 offset)
-{
-  for (u8 i = 0; i < 16; i++)
-    result[offset + i] = _line2[i];
+    result[offset + i] = _lineData[line][i];
 }
 
 void CharacterLCD_SetColor(u8 red, u8 green, u8 blue)
@@ -184,18 +173,18 @@ void CharacterLCD_GetColor(u8 result[], u8 offset)
 
 void CharacterLCD_ProcessLoop()
 {
-  if (_line1Update)
+  if (_lineUpdate[0])
   {
-    _line1Update = 0;
+    _lineUpdate[0] = 0;
     CharacterLCD_SendCommand(LCD_CURSOR_ROW1);
     for (int i = 0; i < 16; i++)
-      CharacterLCD_SendData(_line1[i]);
+      CharacterLCD_SendData(_lineData[0][i]);
   }
-  if (_line2Update)
+  if (_lineUpdate[1])
   {
-    _line2Update = 0;
+    _lineUpdate[1] = 0;
     CharacterLCD_SendCommand(LCD_CURSOR_ROW2);
     for (int i = 0; i < 16; i++)
-      CharacterLCD_SendData(_line2[i]);
+      CharacterLCD_SendData(_lineData[1][i]);
   }
 }

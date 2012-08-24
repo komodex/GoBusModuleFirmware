@@ -6,10 +6,10 @@
 #define CMD_WRITE (1<<7)
 
 #define CMD_COLOR        0x01
-#define CMD_LINE1        0x11
-#define CMD_LINE2        0x12
-
 #define CMD_RAW          0x02
+#define CMD_LINE         0x03
+
+
 
 #include "main.h"
 #include "intrinsics.h"
