@@ -29,6 +29,9 @@ void CharacterLCD_SendCommand(u8 data);
 void CharacterLCD_SendData(u8 data);
 void CharacterLCD_Enable();
 
+void CharacterLCD_SendRaw(u8 id, u8 isData, u8 value);
+void CharacterLCD_GetRaw(u8 result[], u8 offset);
+
 void CharacterLCD_SetLine1(u8* data, u8 start, u8 length);
 void CharacterLCD_SetLine2(u8* data, u8 start, u8 length);
 

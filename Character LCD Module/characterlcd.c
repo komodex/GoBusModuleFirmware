@@ -2,6 +2,10 @@
 
 u8 _initialized = 0;
 
+u8 _rawID = 0;
+u8 _rawType = 0;
+u8 _rawData = 0;
+
 u8 _line1[16];
 u8 _line2[16];
 
@@ -113,6 +117,25 @@ void CharacterLCD_Enable()
   Delay(delay);
   CLCD_LCDE_ODR = 0;
   Delay(delay);
+}
+
+void CharacterLCD_SendRaw(u8 id, u8 isData, u8 value)
+{
+  _rawID = id;
+  _rawType = isData;
+  _rawData = value;
+
+  if (isData)
+    CharacterLCD_SendData(value);
+  else
+    CharacterLCD_SendCommand(value);
+}
+
+void CharacterLCD_GetRaw(u8 result[], u8 offset)
+{
+  result[offset + 0] = _rawID;
+  result[offset + 1] = _rawType;
+  result[offset + 2] = _rawData;
 }
 
 void CharacterLCD_SetLine(u8* destination, u8* data, u8 start, u8 length)

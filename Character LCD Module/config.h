@@ -9,7 +9,7 @@
 #define CMD_LINE1        0x11
 #define CMD_LINE2        0x12
 
-
+#define CMD_RAW          0x02
 
 #include "main.h"
 #include "intrinsics.h"

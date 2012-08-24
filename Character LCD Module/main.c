@@ -41,6 +41,17 @@ void HandleMessage(u8* rxBuffer, u8* txBuffer)
       CharacterLCD_SetColor(rxBuffer[2], rxBuffer[3], rxBuffer[4]);
       break;
 
+    // Raw Commands
+    case CMD_READ | CMD_RAW:
+      txBuffer[1] = CMD_READ | CMD_RAW;
+      CharacterLCD_GetRaw(txBuffer, 2);
+      SendIRQ();
+      break;
+
+    case CMD_WRITE | CMD_RAW:
+      CharacterLCD_SendRaw(rxBuffer[2], rxBuffer[3], rxBuffer[4]);
+      break;
+
     // Line 1
     case CMD_READ | CMD_LINE1:
       txBuffer[1] = CMD_READ | CMD_LINE1;
