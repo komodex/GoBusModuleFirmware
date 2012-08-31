@@ -60,8 +60,6 @@ void SPI_Reset()
 
 INTERRUPT_HANDLER(SPI_IRQ)
 {
-  u8 receivedByte = 0;
-
   // SPI Overflow
   if (SPI_SR_OVR)
   {
@@ -73,7 +71,6 @@ INTERRUPT_HANDLER(SPI_IRQ)
   // Receive buffer not empty
   if (SPI_SR_RXNE)
   {
-    receivedByte = 1;
     // Is this an enumeration request?
     if (_rxBufferPos == 0 && SPI_DR == 0xFE) // todo: define something for this
     {
@@ -82,6 +79,22 @@ INTERRUPT_HANDLER(SPI_IRQ)
     }
     // Read the incoming byte
     _rxBuffer[_rxBufferPos++] = SPI_DR;
+
+    // Process incoming byte
+    if (_rxBufferPos == _currentMessageLength)
+    {
+      if (SPI_SR_CRCERR == 0)
+      {
+        SPI_Reset();
+        HandleMessage(_rxBuffer, _txBuffer);
+        return;
+      }
+      else
+      {
+        SPI_Reset();
+        return;
+      }
+    }
   }
 
   // Transmit buffer empty
@@ -99,23 +112,6 @@ INTERRUPT_HANDLER(SPI_IRQ)
         SPI_CR2_CRCNEXT = 1;
         // Disable TXE interrupt since we're at the end of the message
         SPI_ICR_TXIE = 0;
-      }
-    }
-  }
-
-  // Process incoming byte
-  if (receivedByte)
-  {
-    if (_rxBufferPos == _currentMessageLength)
-    {
-      if (SPI_SR_CRCERR == 0)
-      {
-        SPI_Reset();
-        HandleMessage(_rxBuffer, _txBuffer);
-      }
-      else
-      {
-        SPI_Reset();
       }
     }
   }
