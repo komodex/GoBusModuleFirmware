@@ -1,7 +1,5 @@
 #include "config.h"
 
-extern void HandleMessage(u8* rxBuffer, u8* txBuffer);
-
 u8 _currentMessageLength;
 
 u8 _txBuffer[SPI_MESSAGE_LENGTH];
@@ -10,6 +8,8 @@ u8 _rxBuffer[SPI_MESSAGE_LENGTH];
 u8* _txBufferPtr;
 u8  _txBufferPos;
 u8  _rxBufferPos;
+
+volatile u8 _messageWaiting;
 
 void SPI_Init()
 {
@@ -58,6 +58,15 @@ void SPI_Reset()
     _txBuffer[i] = 0x00;
 }
 
+void SPI_ProcessMessage()
+{
+  if (_messageWaiting)
+  {
+    HandleMessage(_rxBuffer, _txBuffer);
+    _messageWaiting = 0;
+  }
+}
+
 INTERRUPT_HANDLER(SPI_IRQ)
 {
   // SPI Overflow
@@ -65,6 +74,7 @@ INTERRUPT_HANDLER(SPI_IRQ)
   {
     (void)SPI_DR;
     (void)SPI_SR; // TODO: check this for resetting overflow
+    SPI_Reset();
     return;
   }
 
@@ -86,7 +96,7 @@ INTERRUPT_HANDLER(SPI_IRQ)
       if (SPI_SR_CRCERR == 0)
       {
         SPI_Reset();
-        HandleMessage(_rxBuffer, _txBuffer);
+        _messageWaiting = 1;
         return;
       }
       else

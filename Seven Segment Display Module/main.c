@@ -15,6 +15,7 @@ int main( void )
 
   while(1)
   {
+    SPI_ProcessMessage();
   }
 
 }

@@ -13,5 +13,6 @@
 
 void SPI_Init();
 void SPI_Reset();
+void SPI_ProcessMessage();
 
 #endif

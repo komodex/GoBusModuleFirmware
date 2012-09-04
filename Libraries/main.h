@@ -6,6 +6,8 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
+void HandleMessage(u8* rxBuffer, u8* txBuffer);
+
 /////////////////////////////////////////////////////////////////////////////
 // Interrupt Vectors
 
