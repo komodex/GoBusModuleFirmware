@@ -61,7 +61,7 @@ void HandleMessage(u8* rxBuffer, u8* txBuffer)
       break;
 
     case CMD_WRITE | CMD_LINE:
-      CharacterLCD_SetLine(rxBuffer[2], rxBuffer, 3, 16);
+      CharacterLCD_SetLine(rxBuffer[2], rxBuffer, 3, 20);
       break;
 
     // Custom characters

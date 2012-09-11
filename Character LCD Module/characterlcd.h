@@ -62,6 +62,8 @@ void CharacterLCD_ProcessLoop();
 // Move cursor commands
 #define LCD_CURSOR_ROW1 0x80
 #define LCD_CURSOR_ROW2 0xC0
+#define LCD_CURSOR_ROW3 0x94
+#define LCD_CURSOR_ROW4 0xD4
 
 // Custom character addresses
 #define LCD_CUSTOM_CHAR 0x40

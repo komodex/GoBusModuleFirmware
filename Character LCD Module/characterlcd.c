@@ -6,7 +6,7 @@ u8 _rawID = 0;
 u8 _rawType = 0;
 u8 _rawData = 0;
 
-u8 _lineData[4][16];
+u8 _lineData[4][20];
 u8 _lineUpdate[4];
 
 u8 _customCharData[8][8];
@@ -156,7 +156,7 @@ void CharacterLCD_GetLine(u8 line, u8 result[], u8 offset)
     return;
   line--;
 
-  for (u8 i = 0; i < 16; i++)
+  for (u8 i = 0; i < 20; i++)
     result[offset + i] = _lineData[line][i];
 }
 
@@ -175,7 +175,7 @@ void CharacterLCD_GetCustomChar(u8 index, u8 result[], u8 offset)
   if (index > 7)
     return;
 
-  for (u8 i = 0; i < 16; i++)
+  for (u8 i = 0; i < 20; i++)
     result[offset + i] = _customCharData[index][i];
 }
 
@@ -195,19 +195,29 @@ void CharacterLCD_GetColor(u8 result[], u8 offset)
 
 void CharacterLCD_ProcessLoop()
 {
-  if (_lineUpdate[0])
+  for (int i = 0; i < 4; i++)
   {
-    _lineUpdate[0] = 0;
-    CharacterLCD_SendCommand(LCD_CURSOR_ROW1);
-    for (int i = 0; i < 16; i++)
-      CharacterLCD_SendData(_lineData[0][i]);
-  }
-  if (_lineUpdate[1])
-  {
-    _lineUpdate[1] = 0;
-    CharacterLCD_SendCommand(LCD_CURSOR_ROW2);
-    for (int i = 0; i < 16; i++)
-      CharacterLCD_SendData(_lineData[1][i]);
+    if (_lineUpdate[i])
+    {
+      _lineUpdate[i] = 0;
+      switch (i)
+      {
+        case 0:
+          CharacterLCD_SendCommand(LCD_CURSOR_ROW1);
+          break;
+        case 1:
+          CharacterLCD_SendCommand(LCD_CURSOR_ROW2);
+          break;
+        case 2:
+          CharacterLCD_SendCommand(LCD_CURSOR_ROW3);
+          break;
+        case 3:
+          CharacterLCD_SendCommand(LCD_CURSOR_ROW4);
+          break;
+      }
+      for (int j = 0; j < 20; j++)
+        CharacterLCD_SendData(_lineData[i][j]);
+    }
   }
 
   for (int i = 0; i < 8; i++)
