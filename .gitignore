@@ -1,0 +1,6 @@
+# Ignore IAR Embedded Workbench build directories/files
+
+[Dd]ebug/
+[Rr]elease/
+[Ss]ettings/
+*.dep
